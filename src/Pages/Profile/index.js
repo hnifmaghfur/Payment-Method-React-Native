@@ -3,8 +3,17 @@ import style from './style';
 import {View, Text} from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useDispatch, useSelector} from 'react-redux';
+import {AuthLogout} from '../../redux/actions/Auth';
 
 export default function Profile({navigation}) {
+  const {data} = useSelector((state) => state.Users);
+  const {fullName, phoneNumber} = data;
+  console.log(fullName);
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch(AuthLogout());
+  };
   return (
     <View style={style.container}>
       <View
@@ -47,7 +56,7 @@ export default function Profile({navigation}) {
             marginVertical: 20,
             marginBottom: 10,
           }}>
-          Robert Chandler
+          {fullName}
         </Text>
         <Text
           style={{
@@ -56,7 +65,7 @@ export default function Profile({navigation}) {
             marginVertical: 20,
             marginTop: 0,
           }}>
-          +62 813-9387-7946
+          +62 {phoneNumber}
         </Text>
       </View>
       <TouchableOpacity
@@ -117,9 +126,7 @@ export default function Profile({navigation}) {
         </Text>
         <View style={{flex: 4}}>{/* icon is here */}</View>
       </View>
-      <TouchableOpacity
-        style={[style.button, {}]}
-        onPress={() => navigation.navigate('Login')}>
+      <TouchableOpacity style={[style.button, {}]} onPress={onLogout}>
         <Text
           style={{
             flex: 1,

@@ -3,11 +3,18 @@ import style from './style';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {View, Text} from 'react-native';
 import {TextInput} from 'react-native-paper';
+import {useDispatch} from 'react-redux';
+import {Signup as Register} from '../../redux/actions/Register';
 
 export default function Signup({navigation}) {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const dispatch = useDispatch();
+  const onSignup = () => {
+    const data = {fullName: name, email, password};
+    dispatch(Register(data));
+  };
   return (
     <View style={style.container}>
       <Text style={style.logo}>ZWallet</Text>
@@ -37,12 +44,11 @@ export default function Signup({navigation}) {
             style={style.inputMenu}
             placeholder="Enter your Password"
             value={password}
+            secureTextEntry={true}
             onChangeText={(e) => setPassword(e)}
           />
         </View>
-        <TouchableOpacity
-          style={style.button}
-          onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity style={style.button} onPress={onSignup}>
           <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
             Sign Up
           </Text>
@@ -60,12 +66,3 @@ export default function Signup({navigation}) {
     </View>
   );
 }
-
-//         <View>
-//
-//         </View>
-//         <View>
-//         </View>
-//         <View>
-
-//         </View>

@@ -1,14 +1,32 @@
-import {Link} from '@react-navigation/native';
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ToastAndroid} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Button, TextInput} from 'react-native-paper';
-// import Mail from '../../assets/icons/mail.svg';
+import {useDispatch, useSelector} from 'react-redux';
+import {AuthLogin} from '../../redux/actions/Auth';
 import style from './src/style';
 
 export default function Login({navigation}) {
+  const {isLogin, error} = useSelector((state) => state.Auth);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const dispatch = useDispatch();
+
+  const onLogin = () => {
+    const data = {
+      email,
+      password,
+    };
+    // console.log(data);
+    dispatch(AuthLogin(data));
+    if (isLogin) {
+      ToastAndroid.show('Login Successfully', ToastAndroid.SHORT);
+    }
+    if (error && !isLogin) {
+      ToastAndroid.show('Wrong email or password', ToastAndroid.SHORT);
+    }
+  };
+
   return (
     <>
       <View
@@ -59,27 +77,13 @@ export default function Login({navigation}) {
           </View>
           <TextInput
             style={{backgroundColor: 'transparent', marginVertical: 15}}
+            secureTextEntry
             placeholder="Enter your Password"
             value={password}
             // secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
           />
         </View>
-        {/* <Link
-          to="/ForgotPassword"
-          style={{
-            fontSize: 14,
-            textAlign: 'right',
-            margin: 10,
-            marginBottom: 40,
-          }}>
-          Forgot password?
-        </Link> */}
-        {/* <Text
-          
-          onPress={() => navigation.navigate('ForgotPassword')}>
-          
-        </Text> */}
         <TouchableOpacity
           style={{
             fontSize: 14,
@@ -96,9 +100,7 @@ export default function Login({navigation}) {
             Forgot password?
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={style.button}
-          onPress={() => navigation.navigate('Dashboard')}>
+        <TouchableOpacity style={style.button} onPress={() => onLogin()}>
           <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
             Login
           </Text>
@@ -118,24 +120,6 @@ export default function Login({navigation}) {
             Sign Up
           </Text>
         </Text>
-        {/* <View
-          style={{
-            margin: 10,
-            borderRadius: 10,
-            paddingVertical: 10,
-            width: '95%',
-            backgroundColor: 'blue',
-          }}>
-          <Text style={{textAlign: 'center', color: 'white', fontSize: 16}}>
-            Login
-          </Text>
-        </View> */}
-        {/* <Button
-          mode="contained"
-          style={{margin: 10}}
-          onPress={() => navigation.navigate('Dashboard')}>
-          Login
-        </Button> */}
       </View>
     </>
   );

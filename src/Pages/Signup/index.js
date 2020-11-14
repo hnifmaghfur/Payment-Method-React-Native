@@ -14,6 +14,9 @@ export default function Signup({navigation}) {
   const onSignup = () => {
     const data = {fullName: name, email, password};
     dispatch(Register(data));
+    setEmail('');
+    setName('');
+    setPassword('');
   };
   return (
     <View style={style.container}>

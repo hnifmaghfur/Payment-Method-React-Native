@@ -10,26 +10,22 @@ const style = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
   },
-  searchInput: {
+  midTrans: {
     margin: 14,
+    padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: '#E5E5E5',
-  },
-  quickAccess: {
-    flexDirection: 'column',
-    padding: 15,
-    marginTop: 20,
-    elevation: 5,
     backgroundColor: 'white',
-    borderRadius: 10,
+    elevation: 4,
   },
-  contentSearch: {
+  contentProfile: {
     flexDirection: 'row',
-    marginTop: 5,
-    marginBottom: 5,
-    padding: 15,
+    marginTop: 15,
+    marginBottom: 10,
+    marginHorizontal: 14,
+    paddingVertical: 15,
+    paddingHorizontal: 5,
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 20,
@@ -41,16 +37,25 @@ const style = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
 
-    elevation: 2,
+    elevation: 3,
   },
   button: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 10,
-    marginTop: 40,
+    flexDirection: 'row',
+    backgroundColor: '#ffff',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
     margin: 10,
     borderRadius: 10,
-    elevation: 1,
+    elevation: 2,
+  },
+
+  quickAccess: {
+    flexDirection: 'column',
+    padding: 15,
+    marginTop: 20,
+    elevation: 5,
+    backgroundColor: 'white',
+    borderRadius: 10,
   },
 });
 export default style;

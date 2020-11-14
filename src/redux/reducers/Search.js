@@ -1,27 +1,29 @@
 const initialState = {
-  data: [],
+  dataSearch: [],
   loading: false,
 };
 
-export const ProfilePw = (state = initialState, action = {}) => {
+export const UsersSearch = (state = initialState, action = {}) => {
+  console.log(action.payload);
+  console.log('ini reducer usersSearch');
   switch (action.type) {
-    case "PROFILEPW_REQUEST":
+    case 'SEARCH_REQUEST':
       return {
         ...state,
         loading: true,
       };
-    case "PROFILEPW_SUCCESS":
+    case 'SEARCH_SUCCESS':
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        dataSearch: action.payload,
       };
-    case "PROFILEPW_ERROR":
+    case 'SEARCH_ERROR':
       return {
         ...state,
         loading: false,
         isLogin: false,
-        data: [],
+        dataSearch: [],
         error: action.payload,
       };
     default:
@@ -29,4 +31,4 @@ export const ProfilePw = (state = initialState, action = {}) => {
   }
 };
 
-export default ProfilePw;
+export default UsersSearch;

@@ -26,7 +26,8 @@ export const AuthLogin = (fields) => {
       method: 'POST',
       data: fields,
       url:
-        'https://zwallet-sleepless-backend.herokuapp.com/zwallet/api/v1/auth/login',
+        // 'https://zwallet-sleepless-backend.herokuapp.com/zwallet/api/v1/auth/login',
+        'http://192.168.43.141:7000/zwallet/api/v1/auth/login',
     })
       .then((res) => {
         const data = res.data.token.token;

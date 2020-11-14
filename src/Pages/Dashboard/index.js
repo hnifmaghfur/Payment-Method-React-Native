@@ -1,15 +1,23 @@
 import React from 'react';
 import style from './style';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Button} from 'react-native-paper';
 import SvgUri from 'react-native-svg-uri';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {GetSearch} from '../../redux/actions/Search';
 
 export default function Dashboard({navigation}) {
   const {data} = useSelector((state) => state.Users);
+  const {token} = useSelector((state) => state.Auth);
+  const dispatch = useDispatch();
   const {fullName, balance, img, phoneNumber} = data;
+  console.log(img);
+  const onTransfer = () => {
+    dispatch(GetSearch(token, ''));
+    navigation.navigate('Transfer');
+  };
   return (
     <SafeAreaView style={style.container}>
       <ScrollView>
@@ -17,17 +25,13 @@ export default function Dashboard({navigation}) {
         <View style={style.navbar}>
           {/* photo here */}
           <View style={{flex: 2, marginLeft: 15}}>
-            {/* <SvgUri
-              width="52"
-              height="52"
-              source={require('../../assets/img/pp.svg')}
-            /> */}
-            <SvgUri
-              width="52"
-              height="52"
+            <Image
+              style={{
+                width: 52,
+                height: 52,
+              }}
               source={{
-                uri:
-                  'http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg',
+                uri: img,
               }}
             />
           </View>
@@ -48,14 +52,11 @@ export default function Dashboard({navigation}) {
         <View style={style.boxBalance}>
           <Text style={{fontSize: 14, color: 'white'}}>Balance</Text>
           <Text style={style.balanceNumber}>Rp. {balance}</Text>
-          <Text style={{color: 'white', fontSize: 14}}>+62 {phoneNumber}</Text>
+          <Text style={{color: 'white', fontSize: 14}}>+{phoneNumber}</Text>
         </View>
         <View style={{flexDirection: 'row', marginTop: 10}}>
           <View style={{flex: 5, marginHorizontal: 10, marginLeft: 15}}>
-            <Button
-              mode="contained"
-              style={style.button}
-              onPress={() => navigation.navigate('Transfer')}>
+            <Button mode="contained" style={style.button} onPress={onTransfer}>
               Transfer
             </Button>
           </View>

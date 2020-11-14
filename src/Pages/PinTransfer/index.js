@@ -8,6 +8,8 @@ import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 
 const PinTransfer = ({navigation}) => {
   const [pincode, setPincode] = useState('');
+  console.log(pincode);
+  console.log('hasil pin');
 
   const toAmountBank = () => {
     navigation.navigate('AmountBank');

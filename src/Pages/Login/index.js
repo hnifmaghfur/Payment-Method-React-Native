@@ -5,14 +5,16 @@ import {Button, TextInput} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthLogin} from '../../redux/actions/Auth';
 import style from './src/style';
+import Mail from '../../assets/icons/mail.svg';
 
 export default function Login({navigation}) {
+  const inputPassword = React.useRef();
   const {isLogin, error} = useSelector((state) => state.Auth);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const dispatch = useDispatch();
 
-  const onLogin = () => {
+  function onLogin() {
     const data = {
       email,
       password,
@@ -25,7 +27,7 @@ export default function Login({navigation}) {
     if (error && !isLogin) {
       ToastAndroid.show('Wrong email or password', ToastAndroid.SHORT);
     }
-  };
+  }
 
   return (
     <>
@@ -62,26 +64,34 @@ export default function Login({navigation}) {
           Login to your existing account to access all the features in Zwallet.
         </Text>
         <View style={{paddingHorizontal: 10}}>
-          <View>
-            {/* <Mail width={10} height={10} /> */}
+          <View style={{flexDirection: 'row'}}>
+            <View style={{position: 'absolute', top: 38, left: 0}}>
+              <Mail width={20} height={20} />
+              {/* <IconButton color="#444" icon="email-outline" /> */}
+            </View>
             <TextInput
               style={{
                 backgroundColor: 'transparent',
                 marginVertical: 15,
-                paddingHorizontal: 20,
+                paddingHorizontal: 30,
+                flex: 9,
               }}
               placeholder="Enter your E-mail"
               value={email}
               onChangeText={(mail) => setEmail(mail)}
+              onSubmitEditing={() => inputPassword.current.focus()}
+              returnKeyType={'next'}
             />
           </View>
           <TextInput
+            ref={inputPassword}
             style={{backgroundColor: 'transparent', marginVertical: 15}}
-            secureTextEntry
+            // secureTextEntry
             placeholder="Enter your Password"
             value={password}
-            // secureTextEntry={true}
+            secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
+            returnKeyType={'send'}
           />
         </View>
         <TouchableOpacity

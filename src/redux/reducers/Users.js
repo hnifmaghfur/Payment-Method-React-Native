@@ -5,18 +5,24 @@ const initialState = {
 
 export const Users = (state = initialState, action = {}) => {
   switch (action.type) {
-    case "USERS_REQUEST":
+    case 'USERS_REQUEST':
       return {
         ...state,
         loading: true,
       };
-    case "USERS_SUCCESS":
+    case 'USERS_SUCCESS':
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
-    case "USERS_ERROR":
+    case 'USERS_PATCH':
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+    case 'USERS_ERROR':
       return {
         ...state,
         loading: false,

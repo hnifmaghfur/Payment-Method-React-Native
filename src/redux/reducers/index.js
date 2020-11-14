@@ -1,17 +1,17 @@
 import {combineReducers} from 'redux';
 import Auth from './Auth';
 import Users from './Users';
-import UsersSearch from './UsersSearch';
+import Search from './Search';
 import Topup from './Topup';
-import ProfilePw from './ProfilePw';
 import Register from './Register';
+import Transfer from './Transfer';
 
 const reducers = combineReducers({
   Auth,
   Users,
-  UsersSearch,
+  Search,
   Topup,
-  ProfilePw,
+  Transfer,
   Register,
 });
 

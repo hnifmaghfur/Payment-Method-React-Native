@@ -2,8 +2,8 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from 'react-native-splash-screen';
-
 import {useDispatch, useSelector} from 'react-redux';
+
 import {GetUsers} from '../redux/actions/Users';
 
 import Login from '../Pages/Login';
@@ -19,6 +19,9 @@ import Topup from '../Pages/Topup';
 import Profile from '../Pages/Profile';
 import PersonalInformation from '../Pages/PersonalInformation';
 import ForgotNewPassword from '../Pages/ForgotNewPassword';
+import AddPhone from '../Pages/AddPhone';
+import ChangePassword from '../Pages/ChangePassword';
+import ChangePIN from '../Pages/ChangePIN';
 
 const Stack = createStackNavigator();
 
@@ -84,6 +87,21 @@ export default function Route() {
               component={PersonalInformation}
               options={{headerShown: false}}
             />
+            <Stack.Screen
+              name="AddPhone"
+              component={AddPhone}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="ChangePassword"
+              component={ChangePassword}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="ChangePIN"
+              component={ChangePIN}
+              options={{headerShown: false}}
+            />
           </Stack.Navigator>
         ) : (
           <Stack.Navigator initialRouteName="Login">
@@ -100,11 +118,6 @@ export default function Route() {
             <Stack.Screen
               name="ForgotPassword"
               component={ForgotPassword}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="ForgotNewPassword"
-              component={ForgotNewPassword}
               options={{headerShown: false}}
             />
           </Stack.Navigator>

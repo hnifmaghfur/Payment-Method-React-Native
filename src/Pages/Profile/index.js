@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
@@ -8,7 +8,7 @@ import {AuthLogout} from '../../redux/actions/Auth';
 
 export default function Profile({navigation}) {
   const {data} = useSelector((state) => state.Users);
-  const {fullName, phoneNumber} = data;
+  const {fullName, phoneNumber, img} = data;
   console.log(fullName);
   const dispatch = useDispatch();
   const onLogout = () => {
@@ -39,12 +39,13 @@ export default function Profile({navigation}) {
             padding: 5,
             // backgroundColor: '#E5E5E5',
           }}>
-          <SvgUri
-            width="80"
-            height="80"
+          <Image
+            style={{
+              width: 80,
+              height: 80,
+            }}
             source={{
-              uri:
-                'http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg',
+              uri: img,
             }}
           />
         </View>
@@ -65,7 +66,7 @@ export default function Profile({navigation}) {
             marginVertical: 20,
             marginTop: 0,
           }}>
-          +62 {phoneNumber}
+          +{phoneNumber}
         </Text>
       </View>
       <TouchableOpacity
@@ -85,7 +86,7 @@ export default function Profile({navigation}) {
       </TouchableOpacity>
       <TouchableOpacity
         style={style.button}
-        onPress={() => navigation.navigate('Dashboard')}>
+        onPress={() => navigation.navigate('ChangePassword')}>
         <Text
           style={{
             flex: 8,
@@ -100,7 +101,7 @@ export default function Profile({navigation}) {
       </TouchableOpacity>
       <TouchableOpacity
         style={style.button}
-        onPress={() => navigation.navigate('Dashboard')}>
+        onPress={() => navigation.navigate('ChangePIN')}>
         <Text
           style={{
             flex: 8,

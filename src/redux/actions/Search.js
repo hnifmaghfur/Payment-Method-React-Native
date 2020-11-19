@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import {BASE_URL} from '../../components/utils';
 
 const SearchRequest = () => {
   return {
@@ -24,15 +25,15 @@ export const GetSearch = (token, search, limit) => {
     dispatch(SearchRequest());
     return Axios({
       method: 'GET',
-      url: `http://192.168.43.141:7000/zwallet/api/v1/user/all?search=${search}&limit=${limit}`,
+      url: `${BASE_URL}/user/all?search=${search}&limit=${limit}`,
       headers: {
         Authorization: token,
       },
     })
       .then((res) => {
         const data = res.data.data;
-        console.log(data);
-        console.log('ini search redux');
+        // console.log(data);
+        // console.log('ini search redux');
         dispatch(SearchSuccess(data));
       })
       .catch((err) => {

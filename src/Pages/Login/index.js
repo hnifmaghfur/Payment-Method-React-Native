@@ -10,6 +10,7 @@ import Mail from '../../assets/icons/mail.svg';
 export default function Login({navigation}) {
   const inputPassword = React.useRef();
   const {isLogin, error} = useSelector((state) => state.Auth);
+  const {token} = useSelector((state) => state.Device);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const dispatch = useDispatch();
@@ -18,15 +19,11 @@ export default function Login({navigation}) {
     const data = {
       email,
       password,
+      device_token: token,
     };
-    // console.log(data);
+    console.log(data);
+    console.log('data from login');
     dispatch(AuthLogin(data));
-    if (isLogin) {
-      ToastAndroid.show('Login Successfully', ToastAndroid.SHORT);
-    }
-    if (error && !isLogin) {
-      ToastAndroid.show('Wrong email or password', ToastAndroid.SHORT);
-    }
   }
 
   return (

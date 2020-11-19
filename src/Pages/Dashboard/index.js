@@ -7,13 +7,14 @@ import {Button} from 'react-native-paper';
 import SvgUri from 'react-native-svg-uri';
 import {useDispatch, useSelector} from 'react-redux';
 import {GetSearch} from '../../redux/actions/Search';
+import {IMAGE_URL} from '../../components/utils';
 
 export default function Dashboard({navigation}) {
   const {data} = useSelector((state) => state.Users);
   const {token} = useSelector((state) => state.Auth);
   const dispatch = useDispatch();
   const {fullName, balance, img, phoneNumber} = data;
-  console.log(img);
+  // console.log(img);
   const onTransfer = () => {
     dispatch(GetSearch(token, ''));
     navigation.navigate('Transfer');
@@ -31,7 +32,7 @@ export default function Dashboard({navigation}) {
                 height: 52,
               }}
               source={{
-                uri: img,
+                uri: `${IMAGE_URL}/${img}`,
               }}
             />
           </View>

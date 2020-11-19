@@ -4,8 +4,8 @@ const initialState = {
 };
 
 export const UsersSearch = (state = initialState, action = {}) => {
-  console.log(action.payload);
-  console.log('ini reducer usersSearch');
+  // console.log(action.payload);
+  // console.log('ini reducer usersSearch');
   switch (action.type) {
     case 'SEARCH_REQUEST':
       return {

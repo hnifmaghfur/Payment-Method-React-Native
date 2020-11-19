@@ -26,7 +26,7 @@ export const GetTransfer = (token) => {
     return Axios({
       method: 'GET',
       // url: `${BASE_URL}/user`,
-      url: `http://192.168.43.141:7000/zwallet/api/v1/user`,
+      url: `${BASE_URL}/user`,
       headers: {
         Authorization: token,
       },

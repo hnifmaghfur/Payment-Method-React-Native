@@ -1,8 +1,8 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import SplashScreen from 'react-native-splash-screen';
 import {useDispatch, useSelector} from 'react-redux';
+import messaging from '@react-native-firebase/messaging';
 
 import {GetUsers} from '../redux/actions/Users';
 
@@ -22,10 +22,12 @@ import ForgotNewPassword from '../Pages/ForgotNewPassword';
 import AddPhone from '../Pages/AddPhone';
 import ChangePassword from '../Pages/ChangePassword';
 import ChangePIN from '../Pages/ChangePIN';
+import {Device} from '../redux/actions/Device';
 
 const Stack = createStackNavigator();
 
 export default function Route() {
+  const [initialRoute, setInitialRoute] = React.useState('Login');
   const {isLogin, token} = useSelector((state) => state.Auth);
   const dispatch = useDispatch();
 
@@ -35,8 +37,31 @@ export default function Route() {
   dispatch(GetUsers(token));
 
   React.useEffect(() => {
-    SplashScreen.hide();
+    messaging().onNotificationOpenedApp((remoteMessage) => {
+      console.log(
+        'Notification caused app to open from background state:',
+        remoteMessage.notification,
+      );
+      navigation.navigate(remoteMessage.data.type);
+    });
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage) => {
+        if (remoteMessage) {
+          console.log(
+            'Notification caused app to open from quit state:',
+            remoteMessage.notification,
+          );
+          setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+        }
+        setLoading(false);
+      });
+
+    messaging()
+      .getToken()
+      .then((device_token) => dispatch(Device(device_token)));
   }, []);
+
   return (
     <>
       <NavigationContainer>
@@ -104,7 +129,7 @@ export default function Route() {
             />
           </Stack.Navigator>
         ) : (
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator initialRouteName={initialRoute}>
             <Stack.Screen
               name="Login"
               component={Login}

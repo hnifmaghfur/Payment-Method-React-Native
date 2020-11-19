@@ -1,6 +1,7 @@
 const initialState = {
   data: [],
   loading: false,
+  isChange: false,
 };
 
 export const Users = (state = initialState, action = {}) => {
@@ -26,7 +27,21 @@ export const Users = (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        isLogin: false,
+        data: [],
+        error: action.payload,
+      };
+    case 'USERS_PATCH_PASSWORD':
+      return {
+        ...state,
+        loading: false,
+        isChange: true,
+        data: action.payload,
+      };
+    case 'USERS_ERROR_PASSWORD':
+      return {
+        ...state,
+        loading: false,
+        isChange: false,
         data: [],
         error: action.payload,
       };

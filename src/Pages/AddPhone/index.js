@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, Text, TextInput, ToastAndroid} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Button} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
@@ -15,9 +15,15 @@ const AddPhone = ({navigation}) => {
     navigation.navigate('PersonalInformation');
   };
 
-  const Phone = () => {
+  const confirmPhone = () => {
     dispatch(PatchPhone(token, phone));
+    ToastAndroid.show('Success Change Phone Number.', ToastAndroid.LONG);
+    toPersonalInformation();
   };
+
+  // React.useEffect(()=>{
+
+  // })
 
   return (
     <ScrollView style={style.container}>
@@ -58,7 +64,7 @@ const AddPhone = ({navigation}) => {
               borderRadius: 15,
             }}
             mode="contained"
-            onPress={Phone}>
+            onPress={confirmPhone}>
             Submit
           </Button>
         </View>

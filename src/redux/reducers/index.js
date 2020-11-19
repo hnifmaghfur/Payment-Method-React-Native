@@ -5,6 +5,7 @@ import Search from './Search';
 import Topup from './Topup';
 import Register from './Register';
 import Transfer from './Transfer';
+import Device from './Device';
 
 const reducers = combineReducers({
   Auth,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   Topup,
   Transfer,
   Register,
+  Device,
 });
 
 export default reducers;

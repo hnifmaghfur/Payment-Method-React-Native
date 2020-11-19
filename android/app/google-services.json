@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1026514716232",
+    "firebase_url": "https://zwallet-hanif.firebaseio.com",
+    "project_id": "zwallet-hanif",
+    "storage_bucket": "zwallet-hanif.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026514716232:android:88119cc0e150e113537a7d",
+        "android_client_info": {
+          "package_name": "com.zwallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026514716232-gtb8kt9nh2mdqb1o63auumias1po8d56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-hln1hvNuuv0DXnjaNJcF5jS9l7Hdb-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026514716232-gtb8kt9nh2mdqb1o63auumias1po8d56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

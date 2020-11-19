@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import {BASE_URL} from '../../components/utils';
 
 const AuthLoginRequest = () => {
   return {
@@ -27,7 +28,7 @@ export const AuthLogin = (fields) => {
       data: fields,
       url:
         // 'https://zwallet-sleepless-backend.herokuapp.com/zwallet/api/v1/auth/login',
-        'http://192.168.43.141:7000/zwallet/api/v1/auth/login',
+        `${BASE_URL}/auth/login`,
     })
       .then((res) => {
         const data = res.data.token.token;

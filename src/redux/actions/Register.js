@@ -29,7 +29,7 @@ export const Signup = (fields) => {
     return Axios({
       method: 'POST',
       data: fields,
-      url: `https://zwallet-sleepless-backend.herokuapp.com/zwallet/api/v1/auth/register`,
+      url: `${BASE_URL}/auth/register`,
     })
       .then((res) => {
         const data = res.data.token.token;

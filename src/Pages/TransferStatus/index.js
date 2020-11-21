@@ -3,8 +3,15 @@ import {View, ScrollView, Image} from 'react-native';
 
 import styles from './style.js';
 import {Button, Text} from 'react-native-paper';
+import {useSelector} from 'react-redux';
 
 const TransferStatus = ({navigation}) => {
+  const {data: dataTrans} = useSelector((state) => state.Transfer);
+  const {data: dataReceiver} = useSelector((state) => state.Receiver);
+  const {data: dataUser} = useSelector((state) => state.Users);
+  const {amountTransfer, note} = dataTrans;
+  const {balance} = dataUser;
+  const {fullName, phoneNumber, img} = dataReceiver;
   const toDashboard = () => {
     navigation.navigate('Dashboard');
   };
@@ -33,7 +40,9 @@ const TransferStatus = ({navigation}) => {
               <View style={styles.profileStatus}>
                 <View style={styles.profileNameNavbarSection}>
                   <Text style={styles.transactionStatus}>Amount</Text>
-                  <Text style={styles.textPanelConfirm}>Rp100.000</Text>
+                  <Text style={styles.textPanelConfirm}>
+                    Rp. {amountTransfer}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -44,7 +53,7 @@ const TransferStatus = ({navigation}) => {
               <View style={styles.profileStatus}>
                 <View style={styles.profileNameNavbarSection}>
                   <Text style={styles.transactionStatus}>Balance Left</Text>
-                  <Text style={styles.textPanelConfirm}>Rp20.000</Text>
+                  <Text style={styles.textPanelConfirm}>Rp. {balance}</Text>
                 </View>
               </View>
             </View>
@@ -68,9 +77,7 @@ const TransferStatus = ({navigation}) => {
               <View style={styles.profileStatus}>
                 <View style={styles.profileNameNavbarSection}>
                   <Text style={styles.transactionStatus}>Notes</Text>
-                  <Text style={styles.textPanelConfirm}>
-                    For buying some socks
-                  </Text>
+                  <Text style={styles.textPanelConfirm}>{note}</Text>
                 </View>
               </View>
             </View>
@@ -91,10 +98,8 @@ const TransferStatus = ({navigation}) => {
                   style={{width: 65, height: 65, borderRadius: 12}}
                 />
                 <View style={styles.profileNameNavbarSection}>
-                  <Text style={styles.profileName}>Samuel Suhi</Text>
-                  <Text style={styles.transactionStatus}>
-                    +62 813-8492-9994
-                  </Text>
+                  <Text style={styles.profileName}>{fullName}</Text>
+                  <Text style={styles.transactionStatus}>+{phoneNumber}</Text>
                 </View>
               </View>
             </View>
@@ -103,9 +108,7 @@ const TransferStatus = ({navigation}) => {
 
         <View style={styles.buttonPos}>
           <View style={styles.positionCenter}>
-            <Button
-              style={styles.buttonSubmitFilled}
-              onPress={() => toDashboard()}>
+            <Button style={styles.buttonSubmitFilled} onPress={toDashboard}>
               <Text style={styles.textButtonLoginFilled}> Back to Home</Text>
             </Button>
           </View>

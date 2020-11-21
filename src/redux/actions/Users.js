@@ -119,16 +119,26 @@ export const PatchPhoto = (token, dataPhoto) => async (dispatch) => {
 export const OnChangePassword = (token, data) => {
   return (dispatch) => {
     dispatch(UsersRequest());
-    console.log(token);
+    console.log(data);
     console.log('data from actions');
-    return Axios.patch(`${BASE_URL}/user/change_password`, data, {
+    return Axios({
+      method: 'PATCH',
+      // url: `${BASE_URL}/user`,
+      url: `http://192.168.1.11:7000/zwallet/api/v1/user/change_password`,
+      data: data,
       headers: {
         Authorization: token,
       },
     })
       .then((res) => {
+        console.log(res);
+        console.log('ini dari onChange');
         dispatch(UsersPatchPassword(res.data));
       })
-      .catch();
+      .catch((err) => {
+        console.log(err);
+        console.log('ini dari error onChange');
+        dispatch(UsersErrorPassword(err));
+      });
   };
 };

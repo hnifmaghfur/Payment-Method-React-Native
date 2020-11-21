@@ -2,23 +2,18 @@ const initialState = {
   data: [],
 };
 
-export const Transfer = (state = initialState, action = {}) => {
+export const Receiver = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'TRANSFER_REQUEST':
+    case 'RECEIVER_REQUEST':
       return {
         ...state,
       };
-    case 'TRANSFER_SUCCESS':
-      return {
-        ...state,
-        data: action.payload,
-      };
-    case 'PRE_TRANSFER_SUCCESS':
+    case 'RECEIVER_SUCCESS':
       return {
         ...state,
         data: action.payload,
       };
-    case 'TRANSFER_ERROR':
+    case 'RECEIVER_ERROR':
       return {
         ...state,
         data: [],
@@ -28,4 +23,4 @@ export const Transfer = (state = initialState, action = {}) => {
       return state;
   }
 };
-export default Transfer;
+export default Receiver;

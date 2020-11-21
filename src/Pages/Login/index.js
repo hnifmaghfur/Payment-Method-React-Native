@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AuthLogin} from '../../redux/actions/Auth';
 import style from './src/style';
 import Mail from '../../assets/icons/mail.svg';
+import messaging from '@react-native-firebase/messaging';
 
 export default function Login({navigation}) {
   const inputPassword = React.useRef();

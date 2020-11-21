@@ -19,7 +19,8 @@ import {useDispatch, useSelector} from 'react-redux';
 
 const ChangePassword = ({navigation}) => {
   const {token} = useSelector((state) => state.Auth);
-  const {isChange} = useSelector((state) => state.Users);
+  // const {data} = useSelector((state) => state.Users);
+  // const {password} = data;
   const dispatch = useDispatch();
   const [eye, setEye] = useState(true);
   const [secure, setSecure] = useState(true);
@@ -27,12 +28,20 @@ const ChangePassword = ({navigation}) => {
   const [secure1, setSecure1] = useState(true);
   const [eye2, setEye2] = useState(true);
   const [secure2, setSecure2] = useState(true);
-  const [password, setPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [RepeatPassword, setRepeatPassword] = useState('');
   const toProfile = () => {
     navigation.navigate('Profile');
   };
+
+  // React.useEffect(() => {
+  //   // if (passwordDB) {
+  //   ToastAndroid.show('Success Change Password', 1000);
+  //   // } else {
+  //   //   ToastAndroid.show('Old Password is Wrong'), 1000;
+  //   // }
+  // }, [password]);
 
   const security = () => {
     if (secure) {
@@ -63,7 +72,7 @@ const ChangePassword = ({navigation}) => {
   };
 
   const PasswordAction = () => {
-    if (!password && !newPassword && !RepeatPassword) {
+    if (!currentPassword && !newPassword && !RepeatPassword) {
       return ToastAndroid.show('All filled must be filled', 1000);
     } else {
       if (newPassword != RepeatPassword) {
@@ -76,21 +85,13 @@ const ChangePassword = ({navigation}) => {
           );
         } else {
           const data = {
-            password: password,
+            password: currentPassword,
             newPassword: newPassword,
           };
           dispatch(OnChangePassword(token, data));
-          if (isChange) {
-            ToastAndroid.show('Success Change Password', 1000);
-            setPassword('');
-            setNewPassword('');
-            setRepeatPassword('');
-          } else {
-            ToastAndroid.show('Old Password is Wrong'), 1000;
-            setPassword('');
-            setNewPassword('');
-            setRepeatPassword('');
-          }
+          setCurrentPassword('');
+          setNewPassword('');
+          setRepeatPassword('');
         }
       }
     }
@@ -136,7 +137,7 @@ const ChangePassword = ({navigation}) => {
             placeholder="Current password"
             returnKeyType="next"
             secureTextEntry={secure}
-            onChangeText={(e) => setPassword(e)}
+            onChangeText={(e) => setCurrentPassword(e)}
           />
         </View>
         <View style={{padding: 20}}>

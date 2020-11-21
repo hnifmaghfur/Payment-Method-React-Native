@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import {PatchAll} from '../actions/Users';
 import {BASE_URL} from '../../components/utils';
 
 const AuthLoginRequest = () => {
@@ -17,6 +18,11 @@ const AuthLoginError = (error) => {
   return {
     type: 'LOGIN_ERROR',
     payload: error,
+  };
+};
+const LogoutAuth = () => {
+  return {
+    type: 'LOGOUT',
   };
 };
 
@@ -44,8 +50,9 @@ export const AuthLogin = (fields) => {
   };
 };
 
-export const AuthLogout = () => {
-  return {
-    type: 'LOGOUT',
+export const AuthLogout = (token, data) => {
+  return (dispatch) => {
+    dispatch(PatchAll(token, data));
+    dispatch(LogoutAuth());
   };
 };

@@ -4,8 +4,13 @@ import {View, ScrollView, Image} from 'react-native';
 import styles from './style.js';
 import {Button, Text} from 'react-native-paper';
 import MobileNav from '../../components/mobileNav';
+import {useSelector} from 'react-redux';
 
 const ConfirmTransfer = ({navigation}) => {
+  const {data: dataTrans} = useSelector((state) => state.Transfer);
+  const {data: dataReceiver} = useSelector((state) => state.Receiver);
+  const {balanceLeft, note, amountTransfer} = dataTrans;
+  const {fullName, phoneNumber, img} = dataReceiver;
   const toAmountBank = () => {
     navigation.navigate('AmountBank');
   };
@@ -39,10 +44,8 @@ const ConfirmTransfer = ({navigation}) => {
                     style={{width: 65, height: 65, borderRadius: 12}}
                   />
                   <View style={styles.profileNameNavbarSection}>
-                    <Text style={styles.profileName}>Samuel Suhi</Text>
-                    <Text style={styles.transactionStatus}>
-                      +62 813-8492-9994
-                    </Text>
+                    <Text style={styles.profileName}>{fullName}</Text>
+                    <Text style={styles.transactionStatus}>+{phoneNumber}</Text>
                   </View>
                 </View>
               </View>
@@ -59,7 +62,9 @@ const ConfirmTransfer = ({navigation}) => {
                 <View style={styles.profileStatus}>
                   <View style={styles.profileNameNavbarSection}>
                     <Text style={styles.transactionStatus}>Amount</Text>
-                    <Text style={styles.textPanelConfirm}>Rp100.000</Text>
+                    <Text style={styles.textPanelConfirm}>
+                      Rp. {amountTransfer}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -70,7 +75,9 @@ const ConfirmTransfer = ({navigation}) => {
                 <View style={styles.profileStatus}>
                   <View style={styles.profileNameNavbarSection}>
                     <Text style={styles.transactionStatus}>Balance Left</Text>
-                    <Text style={styles.textPanelConfirm}>Rp20.000</Text>
+                    <Text style={styles.textPanelConfirm}>
+                      Rp. {balanceLeft}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -94,9 +101,7 @@ const ConfirmTransfer = ({navigation}) => {
                 <View style={styles.profileStatus}>
                   <View style={styles.profileNameNavbarSection}>
                     <Text style={styles.transactionStatus}>Notes</Text>
-                    <Text style={styles.textPanelConfirm}>
-                      For buying some socks
-                    </Text>
+                    <Text style={styles.textPanelConfirm}>{note}</Text>
                   </View>
                 </View>
               </View>

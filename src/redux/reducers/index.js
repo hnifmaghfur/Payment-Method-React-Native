@@ -6,6 +6,7 @@ import Topup from './Topup';
 import Register from './Register';
 import Transfer from './Transfer';
 import Device from './Device';
+import Receiver from './Receiver';
 
 const reducers = combineReducers({
   Auth,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   Transfer,
   Register,
   Device,
+  Receiver,
 });
 
 export default reducers;

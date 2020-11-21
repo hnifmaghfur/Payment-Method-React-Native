@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './style';
 import {View, Text, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -7,6 +7,7 @@ import {Button} from 'react-native-paper';
 import SvgUri from 'react-native-svg-uri';
 import {useDispatch, useSelector} from 'react-redux';
 import {GetSearch} from '../../redux/actions/Search';
+import {GetUsers} from '../../redux/actions/Users';
 import {IMAGE_URL} from '../../components/utils';
 
 export default function Dashboard({navigation}) {
@@ -19,6 +20,11 @@ export default function Dashboard({navigation}) {
     dispatch(GetSearch(token, ''));
     navigation.navigate('Transfer');
   };
+
+  useEffect(() => {
+    dispatch(GetUsers(token));
+  }, []);
+
   return (
     <SafeAreaView style={style.container}>
       <ScrollView>

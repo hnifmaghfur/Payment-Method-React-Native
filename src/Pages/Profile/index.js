@@ -16,6 +16,8 @@ import {GetUsers, PatchAll, PatchPhoto} from '../../redux/actions/Users';
 export default function Profile({navigation}) {
   const {token} = useSelector((state) => state.Auth);
   const {data} = useSelector((state) => state.Users);
+  // console.log(data);
+  // console.log('data from profile');
   const [rename, setRename] = React.useState('oke');
   const [nameData, setNameData] = React.useState('');
   // const [relog, setRelog] = React.useState(false);
@@ -26,8 +28,10 @@ export default function Profile({navigation}) {
   const down = new Animated.Value(1);
 
   React.useEffect(() => {
-    dispatch(GetUsers(token));
-    sheetRef.current.snapTo(1);
+    if (img) {
+      dispatch(GetUsers(token));
+      sheetRef.current.snapTo(1);
+    }
   }, [img]);
 
   const editName = () => {
@@ -106,7 +110,7 @@ export default function Profile({navigation}) {
   };
 
   const onLogout = () => {
-    dispatch(AuthLogout());
+    dispatch(AuthLogout(token, {device_token: 'nothing'}));
   };
 
   return (

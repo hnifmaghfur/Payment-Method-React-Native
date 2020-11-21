@@ -9,6 +9,7 @@ import {
 } from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {GetSearch} from '../../redux/actions/Search';
+import {GetReceiver} from '../../redux/actions/Receiver';
 
 export default function Transfer({navigation}) {
   const {token} = useSelector((state) => state.Auth);
@@ -26,12 +27,22 @@ export default function Transfer({navigation}) {
     setLimit(100);
   };
 
+  // const OnDataAmount = (id) => {
+  //   // dispatch(GetReceiver(token, id));
+  //   console.log(id);
+  //   // console.log('id receiver amount');
+  //   // navigation.navigate('AmountBank');
+  // };
+
   const ListSearch = ({item, index}) => {
     return (
       <View style={style.contentSearch}>
         <TouchableOpacity
           style={{flexDirection: 'row', padding: 1}}
-          onPress={() => navigation.navigate('AmountBank')}>
+          onPress={() => {
+            dispatch(GetReceiver(token, item.id));
+            navigation.navigate('AmountBank');
+          }}>
           {/* picture */}
           <View style={{borderRadius: 5, elevation: 1, padding: 5}}>
             <Image

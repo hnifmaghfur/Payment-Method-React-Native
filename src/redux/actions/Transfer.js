@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import {BASE_URL} from '../../components/utils';
+import {GetUsers} from './Users';
 
 const TransferRequest = () => {
   return {
@@ -13,6 +14,12 @@ const TransferSuccess = (data) => {
     payload: data,
   };
 };
+const PreTransfer = (data) => {
+  return {
+    type: 'PRE_TRANSFER_SUCCESS',
+    payload: data,
+  };
+};
 const TransferError = (error) => {
   return {
     type: 'TRANSFER_ERROR',
@@ -20,21 +27,34 @@ const TransferError = (error) => {
   };
 };
 
-export const GetTransfer = (token) => {
+export const PreCreateTransfer = (data) => {
+  console.log(data);
+  console.log('data from pre transfer');
   return (dispatch) => {
+    dispatch(PreTransfer(data));
+  };
+};
+
+export const CreateTransfer = (token, data) => {
+  return (dispatch) => {
+    console.log(data);
+    console.log('data createTransfer redux');
     dispatch(TransferRequest());
     return Axios({
-      method: 'GET',
+      method: 'POST',
       // url: `${BASE_URL}/user`,
-      url: `${BASE_URL}/user`,
+      url: `${BASE_URL}/transaction/`,
+      data: data,
       headers: {
         Authorization: token,
       },
     })
       .then((res) => {
-        const data = res.data.data[0];
-        console.log(data, 'action user');
+        const data = res.data.data;
+        console.log(res);
+        console.log('data action transfer');
         dispatch(TransferSuccess(data));
+        dispatch(GetUsers(token));
       })
       .catch((err) => {
         const message = err.message;

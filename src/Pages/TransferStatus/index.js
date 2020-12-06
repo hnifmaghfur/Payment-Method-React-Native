@@ -1,6 +1,6 @@
 import React, {useState, Fragment} from 'react';
 import {View, ScrollView, Image} from 'react-native';
-
+import Success from '../../assets/icons/success.svg';
 import styles from './style.js';
 import {Button, Text} from 'react-native-paper';
 import {useSelector} from 'react-redux';
@@ -11,6 +11,7 @@ const TransferStatus = ({navigation}) => {
   const {data: dataUser} = useSelector((state) => state.Users);
   const {amountTransfer, note} = dataTrans;
   const {balance} = dataUser;
+  console.log('oke');
   const {fullName, phoneNumber, img} = dataReceiver;
   const toDashboard = () => {
     navigation.navigate('Dashboard');
@@ -22,7 +23,7 @@ const TransferStatus = ({navigation}) => {
         <View style={styles.container}>
           <View style={styles.positionCenter}>
             <View style={styles.transferStatus}>
-              <Text>Icon</Text>
+              <Success width={80} height={80} />
             </View>
             <View styles={styles.flexColumn}>
               <View style={styles.positionCenter}>
@@ -65,7 +66,7 @@ const TransferStatus = ({navigation}) => {
                 <View style={styles.profileNameNavbarSection}>
                   <Text style={styles.transactionStatus}>Date & Time</Text>
                   <Text style={styles.textPanelConfirm}>
-                    May 11, 2020 - 12.20
+                    Dec 1, 2020 - 09.53
                   </Text>
                 </View>
               </View>

@@ -1,19 +1,19 @@
 const initialState = {
-  token: [],
+  data: [],
 };
 
-export const Device = (state = initialState, action = {}) => {
+export const HistoryAll = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'DEVICE_REQUEST':
+    case 'HISTORY_ALL_REQUEST':
       return {
         ...state,
       };
-    case 'DEVICE_SUCCESS':
+    case 'HISTORY_ALL_SUCCESS':
       return {
         ...state,
-        token: action.payload,
+        data: action.payload,
       };
-    case 'DEVICE_ERROR':
+    case 'HISTORY_ALL_ERROR':
       return {
         ...state,
         data: [],
@@ -23,4 +23,4 @@ export const Device = (state = initialState, action = {}) => {
       return state;
   }
 };
-export default Device;
+export default HistoryAll;

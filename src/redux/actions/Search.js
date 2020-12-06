@@ -22,6 +22,10 @@ const SearchError = (error) => {
 
 export const GetSearch = (token, search, limit) => {
   return (dispatch) => {
+    console.log(token);
+    console.log(search);
+    console.log(limit);
+    console.log('ini dari get search redux');
     dispatch(SearchRequest());
     return Axios({
       method: 'GET',

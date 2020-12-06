@@ -3,9 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useDispatch, useSelector} from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
-
 import {GetUsers} from '../redux/actions/Users';
-
 import Login from '../Pages/Login';
 import Signup from '../Pages/Signup';
 import Dashboard from '../Pages/Dashboard';
@@ -23,6 +21,9 @@ import AddPhone from '../Pages/AddPhone';
 import ChangePassword from '../Pages/ChangePassword';
 import ChangePIN from '../Pages/ChangePIN';
 import {Device} from '../redux/actions/Device';
+import TransactionHistory from '../Pages/TransactionHistory';
+import Notification from '../Pages/Notification';
+import {GetHistory} from '../redux/actions/History';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ export default function Route() {
   // console.log('ini dari router');
 
   dispatch(GetUsers(token));
+  dispatch(GetHistory(token, 5));
 
   React.useEffect(() => {
     messaging().onNotificationOpenedApp((remoteMessage) => {
@@ -59,7 +61,11 @@ export default function Route() {
 
     messaging()
       .getToken()
-      .then((device_token) => dispatch(Device(device_token)));
+      .then((device_token) => {
+        console.log(device_token);
+        console.log('device_token from router');
+        dispatch(Device(device_token));
+      });
   }, []);
 
   return (
@@ -125,6 +131,16 @@ export default function Route() {
             <Stack.Screen
               name="ChangePIN"
               component={ChangePIN}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="TransactionHistory"
+              component={TransactionHistory}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Notification"
+              component={Notification}
               options={{headerShown: false}}
             />
           </Stack.Navigator>

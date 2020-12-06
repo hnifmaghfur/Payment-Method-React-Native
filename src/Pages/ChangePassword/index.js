@@ -89,6 +89,7 @@ const ChangePassword = ({navigation}) => {
             newPassword: newPassword,
           };
           dispatch(OnChangePassword(token, data));
+          ToastAndroid.show('Successfull Update Password', 1000);
           setCurrentPassword('');
           setNewPassword('');
           setRepeatPassword('');

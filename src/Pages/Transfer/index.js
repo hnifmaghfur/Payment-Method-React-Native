@@ -10,6 +10,9 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {GetSearch} from '../../redux/actions/Search';
 import {GetReceiver} from '../../redux/actions/Receiver';
+import MobileNav from '../../components/mobileNav';
+import SearchIcon from '../../assets/icons/search.svg';
+import {IMAGE_URL} from '../../components/utils';
 
 export default function Transfer({navigation}) {
   const {token} = useSelector((state) => state.Auth);
@@ -51,7 +54,7 @@ export default function Transfer({navigation}) {
                 height: 47,
               }}
               source={{
-                uri: item.img,
+                uri: `${IMAGE_URL}/${item.img}`,
               }}
             />
           </View>
@@ -73,26 +76,15 @@ export default function Transfer({navigation}) {
 
   return (
     <View style={style.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          margin: 10,
-          marginTop: 25,
-          alignItems: 'center',
-        }}>
-        <View style={{marginRight: 10}}>
-          <Text
-            style={{fontWeight: 'bold', fontSize: 17}}
-            onPress={() => navigation.navigate('Dashboard')}>
-            +
-          </Text>
-        </View>
-        <Text style={style.titleHeader}>Find Receiver</Text>
-      </View>
+      <MobileNav
+        thisnavigate={() => navigation.navigate('Dashboard')}
+        pageTitle="Find Receiver"
+      />
       <View style={style.searchInput}>
-        <Text style={{paddingHorizontal: 10}}>icon</Text>
+        <SearchIcon width={20} height={20} style={{left: 10}} />
         <TextInput
-          placeholder="Search receiver here "
+          placeholder="Search receiver here"
+          style={{paddingLeft: 15}}
           value={search}
           onChangeText={(e) => setSearch(e)}
         />
@@ -106,12 +98,51 @@ export default function Transfer({navigation}) {
           style={style.quickAccess}
           onPress={() => navigation.navigate('AmountBank')}>
           <View style={{borderRadius: 5, elevation: 1, padding: 5}}>
-            <SvgUri
-              width="52"
-              height="52"
+            <Image
+              style={{
+                width: 52,
+                height: 52,
+              }}
               source={{
-                uri:
-                  'http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg',
+                uri: `https://images.unsplash.com/photo-1531804055935-76f44d7c3621?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxMjA3fDB8MXxzZWFyY2h8M3x8fHwwfHx8&ixlib=rb-1.2.1&q=80&w=1080`,
+              }}
+            />
+          </View>
+          <View style={{alignItems: 'center', marginTop: 5}}>
+            <Text style={{fontSize: 16, fontWeight: '700'}}>Arung</Text>
+            <Text style={{fontSize: 13}}>-2232</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={style.quickAccess}
+          onPress={() => navigation.navigate('AmountBank')}>
+          <View style={{borderRadius: 5, elevation: 1, padding: 5}}>
+            <Image
+              style={{
+                width: 52,
+                height: 52,
+              }}
+              source={{
+                uri: `https://i.ibb.co/Zm51bxF/img1.png`,
+              }}
+            />
+          </View>
+          <View style={{alignItems: 'center', marginTop: 5}}>
+            <Text style={{fontSize: 16, fontWeight: '700'}}>Ucup</Text>
+            <Text style={{fontSize: 13}}>-4818</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={style.quickAccess}
+          onPress={() => navigation.navigate('AmountBank')}>
+          <View style={{borderRadius: 5, elevation: 1, padding: 5}}>
+            <Image
+              style={{
+                width: 52,
+                height: 52,
+              }}
+              source={{
+                uri: `https://www.microsoft.com/en-us/research/uploads/prod/2018/08/Bewerbungsfoto_sebastian.jpg`,
               }}
             />
           </View>
@@ -142,7 +173,7 @@ export default function Transfer({navigation}) {
             </Text>
           </TouchableOpacity>
         ) : (
-          <Text>This Is Last Page...</Text>
+          <Text style={{textAlign: 'center'}}>This Is Last Page...</Text>
         )}
       </ScrollView>
     </View>

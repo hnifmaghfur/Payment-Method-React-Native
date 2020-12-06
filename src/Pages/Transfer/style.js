@@ -12,6 +12,7 @@ const style = StyleSheet.create({
   },
   searchInput: {
     margin: 14,
+    marginTop: 0,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 10,
@@ -19,7 +20,7 @@ const style = StyleSheet.create({
   },
   quickAccess: {
     flexDirection: 'column',
-    padding: 15,
+    padding: 10,
     marginTop: 20,
     elevation: 5,
     backgroundColor: 'white',

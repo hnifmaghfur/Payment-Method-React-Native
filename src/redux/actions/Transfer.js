@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import {BASE_URL} from '../../components/utils';
+import {GetHistory} from './History';
 import {GetUsers} from './Users';
 
 const TransferRequest = () => {
@@ -54,6 +55,7 @@ export const CreateTransfer = (token, data) => {
         console.log(res);
         console.log('data action transfer');
         dispatch(TransferSuccess(data));
+        dispatch(GetHistory(token, 5));
         dispatch(GetUsers(token));
       })
       .catch((err) => {

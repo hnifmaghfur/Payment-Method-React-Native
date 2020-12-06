@@ -5,6 +5,7 @@ import styles from './style.js';
 import {Button, Text} from 'react-native-paper';
 import MobileNav from '../../components/mobileNav';
 import {useSelector} from 'react-redux';
+import {IMAGE_URL} from '../../components/utils/index.js';
 
 const ConfirmTransfer = ({navigation}) => {
   const {data: dataTrans} = useSelector((state) => state.Transfer);
@@ -38,8 +39,7 @@ const ConfirmTransfer = ({navigation}) => {
                 <View style={styles.profileStatus}>
                   <Image
                     source={{
-                      uri:
-                        'https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-icon-eps-file-easy-to-edit-default-avatar-photo-placeholder-profile-icon-124557887.jpg',
+                      uri: `${IMAGE_URL}/${img}`,
                     }}
                     style={{width: 65, height: 65, borderRadius: 12}}
                   />
@@ -89,7 +89,7 @@ const ConfirmTransfer = ({navigation}) => {
                   <View style={styles.profileNameNavbarSection}>
                     <Text style={styles.transactionStatus}>Date & Time</Text>
                     <Text style={styles.textPanelConfirm}>
-                      May 11, 2020 - 12.20
+                      Dec 1, 2020 - 09.53
                     </Text>
                   </View>
                 </View>

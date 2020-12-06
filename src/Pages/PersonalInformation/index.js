@@ -1,16 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './style';
 import {View, Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import MobileNav from '../../components/mobileNav';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {GetUsers} from '../../redux/actions/Users';
 
 export default function PersonalInformation({navigation}) {
   const {data} = useSelector((state) => state.Users);
+  // const {token} = useSelector((state) => state.Auth);
   const {fullName, phoneNumber, email} = data;
+  console.log(fullName, ' from data personalinformastion');
   const toProfile = () => {
     navigation.navigate('Profile');
   };
+
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(GetUsers(token));
+  // }, [phoneNumber]);
+
   return (
     <ScrollView style={style.container}>
       <MobileNav

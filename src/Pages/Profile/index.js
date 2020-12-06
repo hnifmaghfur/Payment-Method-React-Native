@@ -1,43 +1,43 @@
 import React from 'react';
 import style from './style';
 import {View, Text, Image, ToastAndroid} from 'react-native';
-import SvgUri from 'react-native-svg-uri';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import SvgUri from 'react-native-svg-uri';
 import {useDispatch, useSelector} from 'react-redux';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {Button, TextInput} from 'react-native-paper';
 import ImagePicker from 'react-native-image-picker';
 import {IMAGE_URL} from '../../components/utils';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AuthLogout} from '../../redux/actions/Auth';
+import ArrowLeft from '../../assets/icons/arrow-left.svg';
 import {GetUsers, PatchAll, PatchPhoto} from '../../redux/actions/Users';
 
 export default function Profile({navigation}) {
   const {token} = useSelector((state) => state.Auth);
   const {data} = useSelector((state) => state.Users);
+  const {token: device_token} = useSelector((state) => state.Device);
   // console.log(data);
   // console.log('data from profile');
-  const [rename, setRename] = React.useState('oke');
-  const [nameData, setNameData] = React.useState('');
+  // const [rename, setRename] = React.useState('oke');
+  // const [nameData, setNameData] = React.useState('');
   // const [relog, setRelog] = React.useState(false);
   const {fullName, phoneNumber, img} = data;
-  // console.log(fullName);
+  console.log(img);
+  console.log('img for profile');
   const dispatch = useDispatch();
   const sheetRef = React.useRef(null);
   const down = new Animated.Value(1);
 
   React.useEffect(() => {
     if (img) {
+      console.log(img);
+      console.log('img for profile effect');
       dispatch(GetUsers(token));
       sheetRef.current.snapTo(1);
     }
   }, [img]);
-
-  const editName = () => {
-    dispatch(PatchAll(token, {fullName: nameData}));
-    setRename('oke');
-  };
 
   const renderHeader = () => (
     <View style={style.header}>
@@ -110,6 +110,7 @@ export default function Profile({navigation}) {
   };
 
   const onLogout = () => {
+    AsyncStorage.setItem('device_token', device_token);
     dispatch(AuthLogout(token, {device_token: 'nothing'}));
   };
 
@@ -123,13 +124,12 @@ export default function Profile({navigation}) {
             marginTop: 25,
             alignItems: 'center',
           }}>
-          <View style={{marginRight: 10}}>
-            <Text
-              style={{fontWeight: 'bold', fontSize: 17}}
-              onPress={() => navigation.navigate('Dashboard')}>
-              +
-            </Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Dashboard');
+            }}>
+            <ArrowLeft width={20} height={20} />
+          </TouchableOpacity>
         </View>
         <View style={{alignItems: 'center'}}>
           <TouchableOpacity

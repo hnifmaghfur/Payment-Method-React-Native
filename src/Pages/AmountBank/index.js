@@ -6,6 +6,7 @@ import {Button, Text} from 'react-native-paper';
 import MobileNav from '../../components/mobileNav';
 import {useDispatch, useSelector} from 'react-redux';
 import {PreCreateTransfer} from '../../redux/actions/Transfer';
+import {IMAGE_URL} from '../../components/utils/index.js';
 
 const AmountBank = ({navigation}) => {
   // const {token} = useSelector((state) => state.Auth);
@@ -13,8 +14,8 @@ const AmountBank = ({navigation}) => {
   const [amount, setAmount] = useState(0);
   const {data} = useSelector((state) => state.Receiver);
   const {data: dataUser} = useSelector((state) => state.Users);
-  const {fullName, img, phoneNumber, id, pin} = data;
-  const {balance} = dataUser;
+  const {fullName, img, phoneNumber, id} = data;
+  const {balance, pin} = dataUser;
   const dispatch = useDispatch();
   console.log(data);
   console.log('receiver amount');
@@ -65,8 +66,7 @@ const AmountBank = ({navigation}) => {
                 <View style={styles.profileStatus}>
                   <Image
                     source={{
-                      uri:
-                        'https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-icon-eps-file-easy-to-edit-default-avatar-photo-placeholder-profile-icon-124557887.jpg',
+                      uri: `${IMAGE_URL}/${img}`,
                     }}
                     style={{width: 65, height: 65, borderRadius: 12}}
                   />

@@ -1,17 +1,21 @@
 import React, {useState, Fragment} from 'react';
 import {View, ScrollView, ToastAndroid} from 'react-native';
-
+import {io} from 'socket.io-client';
 import styles from './style.js';
 import {Button, Text} from 'react-native-paper';
 import MobileNav from '../../components/mobileNav';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import {useDispatch, useSelector} from 'react-redux';
 import {CreateTransfer} from '../../redux/actions/Transfer.js';
+import {IMAGE_URL} from '../../components/utils';
 
 const PinTransfer = ({navigation}) => {
+  const socket = io(IMAGE_URL);
   const [pincode, setPincode] = useState('');
   const {token} = useSelector((state) => state.Auth);
+  const {data: dataUser} = useSelector((state) => state.Users);
   const {data} = useSelector((state) => state.Transfer);
+  const {id: idUser} = dataUser;
   const {balanceLeft, note, amountTransfer, pin, receiver, status} = data;
   // console.log(balanceLeft);
   // console.log('balance left');
@@ -23,6 +27,7 @@ const PinTransfer = ({navigation}) => {
 
   const onTransferStatus = () => {
     if (pincode == pin) {
+      // socket.emit('initial-data', idUser);
       dispatch(
         CreateTransfer(token, {
           balanceLeft: balanceLeft,

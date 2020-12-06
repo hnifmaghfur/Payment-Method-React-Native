@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import {PatchAll} from '../actions/Users';
 import {BASE_URL} from '../../components/utils';
+import {Device} from './Device';
 
 const AuthLoginRequest = () => {
   return {
@@ -26,9 +27,11 @@ const LogoutAuth = () => {
   };
 };
 
-export const AuthLogin = (fields) => {
+export const AuthLogin = (device_token, fields) => {
   return (dispatch) => {
     dispatch(AuthLoginRequest());
+    console.log(fields);
+    console.log('fields from redux');
     return Axios({
       method: 'POST',
       data: fields,
@@ -42,6 +45,7 @@ export const AuthLogin = (fields) => {
         // console.log('ini dari login');
 
         dispatch(AuthLoginSuccess(data));
+        dispatch(Device(device_token));
       })
       .catch((err) => {
         const message = err.message;

@@ -17,8 +17,9 @@ const AddPhone = ({navigation}) => {
 
   const confirmPhone = () => {
     dispatch(PatchPhone(token, phone));
+    // setPhone(0);
     ToastAndroid.show('Success Change Phone Number.', ToastAndroid.LONG);
-    toPersonalInformation();
+    navigation.navigate('Dashboard');
   };
 
   // React.useEffect(()=>{

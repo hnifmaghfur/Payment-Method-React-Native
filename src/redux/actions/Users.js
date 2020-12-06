@@ -10,14 +10,14 @@ const UsersRequest = () => {
 const UsersSuccess = (data) => {
   return {
     type: 'USERS_SUCCESS',
-    payload: data[0],
+    payload: data,
   };
 };
 
 const UsersPatch = (data) => {
   return {
     type: 'USERS_PATCH',
-    payload: data.data[0],
+    payload: data,
   };
 };
 
@@ -47,7 +47,9 @@ export const GetUsers = (token) => async (dispatch) => {
       Authorization: token,
     },
   });
-  dispatch(UsersSuccess(res.data.data));
+  console.log(res.data);
+  console.log('res.data get user');
+  dispatch(UsersSuccess(res.data.data[0]));
 };
 
 export const PatchPhone = (token, phone) => {
@@ -66,8 +68,9 @@ export const PatchPhone = (token, phone) => {
     })
       .then((res) => {
         const data = res.data;
-        // console.log(data, 'action user');
+        console.log(data, 'action user');
         dispatch(UsersPatch(data));
+        // dispatch(GetUsers(token));
       })
       .catch((err) => {
         const message = err.message;
@@ -103,6 +106,8 @@ export const PatchAll = (token, dataGet) => {
 export const PatchPhoto = (token, dataPhoto) => async (dispatch) => {
   dispatch(UsersRequest());
   try {
+    console.log(token);
+    console.log('token user redux');
     const res = await Axios.patch(`${BASE_URL}/user/patch_user`, dataPhoto, {
       headers: {
         Authorization: token,
@@ -110,7 +115,10 @@ export const PatchPhoto = (token, dataPhoto) => async (dispatch) => {
         Accept: 'application/json',
       },
     });
-    dispatch(UsersPatch(res.data));
+    console.log(res.data.data[0]);
+    console.log('res.data.data[0]');
+    dispatch(UsersPatch(res.data.data[0]));
+    dispatch(GetUsers(token));
   } catch (error) {
     dispatch(UsersError(error.response.data));
   }

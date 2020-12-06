@@ -7,6 +7,8 @@ import Register from './Register';
 import Transfer from './Transfer';
 import Device from './Device';
 import Receiver from './Receiver';
+import History from './History';
+import HistoryAll from './HistoryAll';
 
 const reducers = combineReducers({
   Auth,
@@ -17,6 +19,8 @@ const reducers = combineReducers({
   Register,
   Device,
   Receiver,
+  History,
+  HistoryAll,
 });
 
 export default reducers;

@@ -1,30 +1,72 @@
 import React from 'react';
-import {View, Text, ToastAndroid} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {View, Text, ToastAndroid, TouchableOpacity} from 'react-native';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Button, TextInput} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthLogin} from '../../redux/actions/Auth';
 import style from './src/style';
 import Mail from '../../assets/icons/mail.svg';
+import Lock from '../../assets/icons/lock.svg';
+import Eye from '../../assets/icons/eye-crossed-close.svg';
+import EyeFalse from '../../assets/icons/eye-crossed.svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
 
 export default function Login({navigation}) {
   const inputPassword = React.useRef();
   const {isLogin, error} = useSelector((state) => state.Auth);
-  const {token} = useSelector((state) => state.Device);
+  const {token: device_token} = useSelector((state) => state.Device);
+  const [eye, setEye] = React.useState(true);
+  const [secure, setSecure] = React.useState(true);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const dispatch = useDispatch();
 
+  const security = () => {
+    if (secure) {
+      setSecure(false);
+      setEye(false);
+    } else {
+      setSecure(true);
+      setEye(true);
+    }
+  };
+
   function onLogin() {
-    const data = {
-      email,
-      password,
-      device_token: token,
-    };
-    console.log(data);
-    console.log('data from login');
-    dispatch(AuthLogin(data));
+    let data = {};
+    if (email.length < 1 && password.length < 1) {
+      return ToastAndroid.show('Please enter email and password', 2000);
+    }
+    if (device_token.length > 0) {
+      data = {
+        email,
+        password,
+        device_token: device_token,
+      };
+      console.log(data);
+      console.log('data from login');
+      dispatch(AuthLogin(device_token, data));
+    } else {
+      AsyncStorage.getItem('device_token').then((res) => {
+        if (!res) {
+          return ToastAndroid.show(
+            'Device not detect! Please reopen app',
+            2000,
+          );
+        }
+        data = {
+          email,
+          password,
+          device_token: res,
+        };
+        console.log(res, 'from async storage');
+        dispatch(AuthLogin(res, data));
+      });
+      AsyncStorage.removeItem('device_token');
+    }
+
+    // console.log(data);
+    // console.log('data from login');
   }
 
   return (
@@ -81,16 +123,33 @@ export default function Login({navigation}) {
               returnKeyType={'next'}
             />
           </View>
+          <View style={{position: 'absolute', top: 128, left: 12}}>
+            <Lock width={23} height={23} />
+          </View>
+
           <TextInput
             ref={inputPassword}
-            style={{backgroundColor: 'transparent', marginVertical: 15}}
+            style={{
+              backgroundColor: 'transparent',
+              marginVertical: 15,
+              paddingHorizontal: 30,
+            }}
             // secureTextEntry
             placeholder="Enter your Password"
             value={password}
-            secureTextEntry={true}
+            secureTextEntry={secure}
             onChangeText={(password) => setPassword(password)}
             returnKeyType={'send'}
           />
+          <TouchableOpacity
+            style={{position: 'absolute', top: 135, left: 350}}
+            onPress={security}>
+            {eye ? (
+              <Eye width={20} height={20} />
+            ) : (
+              <EyeFalse width={20} height={20} />
+            )}
+          </TouchableOpacity>
         </View>
         <TouchableOpacity
           style={{

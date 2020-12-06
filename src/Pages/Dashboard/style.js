@@ -28,9 +28,14 @@ const style = StyleSheet.create({
     borderRadius: 10,
   },
   button: {
+    flex: 5,
+    elevation: 1,
+    borderRadius: 5,
     paddingVertical: 5,
     borderRadius: 10,
-    backgroundColor: '#6379F4',
+    marginBottom: 10,
+    backgroundColor: 'white',
+    alignItems: 'center',
   },
   contentHistory: {
     flexDirection: 'row',

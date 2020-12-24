@@ -10,6 +10,12 @@ Zwallet payment adalah aplikasi pembayaran online berbasis android yang dikemban
 - Postman
 - Android Studio
 
+## How to Run
+- Download Aplikasi (APK File) pada [Link ini](https://drive.google.com/file/d/1u6N8_eHBA_wgxESFQfl6sERASuE7P16T/view?usp=sharing).
+- Akses menggunakan akun
+...Email     : `anip@gmail.com`
+...Password  : `123456`
+  
 ## Screen shoot
 
 - [Transaction Flow](https://github.com/hnifmaghfur/Zwallet-Android-RN/blob/master/src/assets/gallery/2.png)

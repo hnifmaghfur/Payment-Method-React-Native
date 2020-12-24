@@ -12,9 +12,9 @@ Zwallet payment adalah aplikasi pembayaran online berbasis android yang dikemban
 
 ## How to Run
 - Download Aplikasi (APK File) pada [Link ini](https://drive.google.com/file/d/1u6N8_eHBA_wgxESFQfl6sERASuE7P16T/view?usp=sharing).
-- Akses menggunakan akun
-⋅⋅⋅Email     : `anip@gmail.com`⋅⋅
-⋅⋅⋅Password  : `123456`⋅⋅
+- Akses menggunakan akun <br>
+Email     : `anip@gmail.com`<br>
+Password  : `123456`
   
 ## Screen shoot
 
